@@ -67,7 +67,7 @@ public class ViaggiController {
     }
 
     // PUT http://localhost:3001/viaggi/{idViaggio}/stato + BODY
-    @PutMapping("/{idViaggio}")
+    @PutMapping("/{idViaggio}/stato")
     public Viaggio findByIdAndUpdateState(@PathVariable UUID idViaggio, @RequestBody StatoViaggioDTO body) {
         return this.viaggiService.findByIdAndUpdateStato(idViaggio, body);
     }

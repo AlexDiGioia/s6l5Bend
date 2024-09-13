@@ -24,6 +24,7 @@ public class PrenotazioniController {
     private PrenotazioniService prenotazioniService;
 
     // GET http://localhost:3001/prenotazioni
+    @GetMapping
     public Page<Prenotazione> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -37,7 +38,7 @@ public class PrenotazioniController {
         return this.prenotazioniService.findById(idPrenotazione);
     }
 
-    
+
     // POST http://localhost:3001/prenotazioni + BODY
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
