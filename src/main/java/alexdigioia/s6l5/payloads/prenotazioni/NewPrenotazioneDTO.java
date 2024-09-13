@@ -1,7 +1,5 @@
 package alexdigioia.s6l5.payloads.prenotazioni;
 
-import alexdigioia.s6l5.entities.Dipendente;
-import alexdigioia.s6l5.entities.Viaggio;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -16,11 +14,12 @@ public record NewPrenotazioneDTO(
         String preferenze,
 
         @NotNull(message = "Il viaggio è obbligatorio.")
-        Viaggio viaggio,
+        @Size(min = 36, max = 36, message = "L'id del viaggio deve avere 36 caratteri")
+        String viaggio,
 
         @NotNull(message = "Il dipendente è obbligatorio.")
-        Dipendente dipendente
-
+        @Size(min = 36, max = 36, message = "L'id del dipendente deve avere 36 caratteri")
+        String dipendente
 
 ) {
 }
