@@ -8,11 +8,17 @@ import alexdigioia.s6l5.repositories.DipendentiRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.UUID;
 
+@Service
 public class DipendentiService {
 
     @Autowired
@@ -32,6 +38,12 @@ public class DipendentiService {
                 "https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome());
 
         return this.dipendentiRepository.save(newDipendente);
+    }
+
+    public Page<Dipendente> findAll(int page, int size, String sortBy) {
+        if (page > 100) page = 100;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return this.dipendentiRepository.findAll(pageable);
     }
 
     public Dipendente findById(UUID dipendenteId) {
@@ -56,8 +68,8 @@ public class DipendentiService {
         this.dipendentiRepository.delete(this.findById(employeeId));
     }
 
-    public Dipendente uploadImage(UUID employeeId, MultipartFile file) throws IOException {
-        Dipendente found = findById(employeeId);
+    public Dipendente uploadImage(UUID dipendenteId, MultipartFile file) throws IOException {
+        Dipendente found = findById(dipendenteId);
         String avatar = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         found.setAvatarURL(avatar);
         return this.dipendentiRepository.save(found);

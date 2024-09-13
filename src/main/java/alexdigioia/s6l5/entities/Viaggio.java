@@ -23,4 +23,10 @@ public class Viaggio {
     private String destinazione;
     private LocalDate dataPartenza;
     private String stato;
+
+    public Viaggio(String destinazione, LocalDate dataPartenza, String stato) {
+        this.destinazione = destinazione;
+        this.dataPartenza = dataPartenza;
+        this.stato = stato;
+    }
 }
