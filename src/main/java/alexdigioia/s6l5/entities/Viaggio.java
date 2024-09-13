@@ -20,7 +20,7 @@ public class Viaggio {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private UUID id;
-    private String descrizione;
+    private String destinazione;
     private LocalDate dataPartenza;
     private String stato;
 }
