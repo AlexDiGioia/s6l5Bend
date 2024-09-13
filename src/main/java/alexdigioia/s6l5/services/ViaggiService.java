@@ -46,12 +46,24 @@ public class ViaggiService {
         this.viaggiRepository.delete(found);
     }
 
-    public Viaggio findByIdAndUpdateState(UUID viaggioId, StatoViaggioDTO updatedStatoViaggioDTO) {
+    public Viaggio findByIdAndUpdate(UUID idViaggio, NewViaggioDTO newViaggioDTO) {
+        Viaggio viaggio = viaggiRepository.findById(idViaggio)
+                .orElseThrow(() -> new NotFoundException(idViaggio));
+
+        viaggio.setDestinazione(newViaggioDTO.destinazione());
+        viaggio.setDataPartenza(newViaggioDTO.dataPartenza());
+        viaggio.setStato(newViaggioDTO.stato());
+
+        return viaggiRepository.save(viaggio);
+    }
+
+    public Viaggio findByIdAndUpdateStato(UUID viaggioId, StatoViaggioDTO updatedStatoViaggioDTO) {
         Viaggio viaggio = viaggiRepository.findById(viaggioId)
                 .orElseThrow(() -> new NotFoundException(viaggioId));
 
         viaggio.setStato(updatedStatoViaggioDTO.stato());
-        
+
         return viaggiRepository.save(viaggio);
     }
+
 }

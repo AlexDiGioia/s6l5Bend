@@ -19,7 +19,7 @@ public class Dipendente {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private UUID id;
+    private UUID idDipendente;
     private String username;
     private String nome;
     private String cognome;

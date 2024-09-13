@@ -16,7 +16,7 @@ public class Prenotazione {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private UUID id;
+    private UUID idPrenotazione;
     private LocalDate dataPrenotazione;
     private String preferenze;
 

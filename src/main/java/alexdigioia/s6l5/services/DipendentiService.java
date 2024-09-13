@@ -46,17 +46,17 @@ public class DipendentiService {
         return this.dipendentiRepository.findAll(pageable);
     }
 
-    public Dipendente findById(UUID dipendenteId) {
-        return this.dipendentiRepository.findById(dipendenteId).orElseThrow(() -> new NotFoundException(dipendenteId));
+    public Dipendente findById(UUID idDipendente) {
+        return this.dipendentiRepository.findById(idDipendente).orElseThrow(() -> new NotFoundException(idDipendente));
     }
 
-    public Dipendente findByIdAndUpdate(UUID dipendeteId, NewDipendenteDTO updatedDipendente) {
+    public Dipendente findByIdAndUpdate(UUID idDipendente, NewDipendenteDTO updatedDipendente) {
         this.dipendentiRepository.findByEmail(updatedDipendente.email()).ifPresent(
                 dipendente -> {
-                    throw new BadRequestException("L'email " + updatedDipendente.email() + " è già in uso!");
+                    throw new BadRequestException("L'email " + updatedDipendente.email() + " è già stata usata!");
                 }
         );
-        Dipendente found = findById(dipendeteId);
+        Dipendente found = findById(idDipendente);
         found.setUsername(updatedDipendente.username());
         found.setNome(updatedDipendente.nome());
         found.setCognome(updatedDipendente.cognome());
@@ -68,10 +68,10 @@ public class DipendentiService {
         this.dipendentiRepository.delete(this.findById(employeeId));
     }
 
-    public Dipendente uploadImage(UUID dipendenteId, MultipartFile file) throws IOException {
-        Dipendente found = findById(dipendenteId);
-        String avatar = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
-        found.setAvatarURL(avatar);
-        return this.dipendentiRepository.save(found);
+    public void uploadImage(UUID idDipendente, MultipartFile file) throws IOException {
+        Dipendente found = findById(idDipendente);
+        String avatarURL = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setAvatarURL(avatarURL);
+        this.dipendentiRepository.save(found);
     }
 }

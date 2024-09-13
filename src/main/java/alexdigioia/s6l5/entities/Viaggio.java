@@ -19,7 +19,7 @@ public class Viaggio {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private UUID id;
+    private UUID idViaggio;
     private String destinazione;
     private LocalDate dataPartenza;
     private String stato;
