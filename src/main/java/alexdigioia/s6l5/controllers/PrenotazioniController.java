@@ -28,7 +28,7 @@ public class PrenotazioniController {
     public Page<Prenotazione> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "data") String sortBy) {
+            @RequestParam(defaultValue = "dataPrenotazione") String sortBy) {
         return this.prenotazioniService.findAll(page, size, sortBy);
     }
 

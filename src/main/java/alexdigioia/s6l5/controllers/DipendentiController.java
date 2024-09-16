@@ -30,7 +30,7 @@ public class DipendentiController {
     @GetMapping
     public Page<Dipendente> getAllDipendenti(@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "10") int size,
-                                             @RequestParam(defaultValue = "id") String sortBy) {
+                                             @RequestParam(defaultValue = "idDipendente") String sortBy) {
         return this.dipendentiService.findAll(page, size, sortBy);
     }
 
