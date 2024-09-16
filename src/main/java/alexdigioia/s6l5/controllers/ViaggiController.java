@@ -29,7 +29,7 @@ public class ViaggiController {
     public Page<Viaggio> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "data") String sortBy) {
+            @RequestParam(defaultValue = "dataPartenza") String sortBy) {
         return this.viaggiService.findAll(page, size, sortBy);
     }
 
